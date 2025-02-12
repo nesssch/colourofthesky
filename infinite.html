@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        .sky{
+            height: 10000px;
+            width:50%;
+            margin: auto;
+            overflow: hidden;
+        }
+
+        .hardsky1{
+            background-image: linear-gradient(#e9f4fa, #8dd4fd);
+            height:10000px;
+        }
+
+        .hardsky2{
+            background-image: linear-gradient(#8dd4fd, #1655b4);
+            height:12000px;
+        }
+
+        .hardsky3{
+            background-image: linear-gradient(#1655b4, #010813);
+            height:12000px;
+        }
+
+        .hardsky4{
+            background-image: linear-gradient(#010813, #805e9c);
+        }
+
+        .hardsky5{
+            background-image: linear-gradient(#805e9c, #ace1ff);
+        }
+
+        .stdsky{
+            background-image: linear-gradient(#ace1ff, #136ce0, #ace1ff);
+        }
+
+        .hellojon{
+            margin:30px;
+            color: #c3d8f7; 
+            font-size:100px;
+        }
+
+        .hellojon2 {
+            margin:50px;
+            margin-top:100px;
+            color:#70a8f1; 
+            font-size:80px;
+        }
+
+        button{
+            position:fixed;
+        }
+    </style>
+</head>
+<body id="body">
+    <button onclick=CLOUDS()>CLOUDS</button>
+    <script>
+        var skyNum = 2;
+        document.getElementById("body").onscroll = function() {youJustScrolled()};
+
+        function youJustScrolled(){
+            console.log("you just scrolled :)");
+            //console.log(document.body.scrollHeight);
+            //console.log(window.scrollY);
+            //console.log("sky number = " + skyNum);
+            if (document.body.scrollHeight - window.scrollY < 1000){
+                addSky();
+            }
+        }
+
+        function addSky(){
+            const newSky = document.createElement("div");
+            newSky.className = "sky stdsky";
+            const body = document.getElementById("body");
+            body.appendChild(newSky);
+            skyNum++;
+            newSky.id = "sky" + skyNum;
+
+            // const CLOUD = document.createElement("img");
+            // CLOUD.src = "cloud3.png";
+            // document.getElementById("sky" + skyNum).appendChild(CLOUD);
+        }
+
+        function CLOUDS(){
+            const CLOUD = document.createElement("img");
+            CLOUD.src = "cloud3.png";
+            console.log("adding cloud to sky" + skyNum);
+            document.getElementById("sky" + skyNum).appendChild(CLOUD);
+            //CLOUD.style.marginBottom = document.body.scrollHeight;
+            //currDiv = document.getElementById("sky" + skyNum);
+            //currDiv.appendChild(CLOUD);
+            //return CLOUD;
+        }
+    </script>
+    <div class="sky hardsky1">
+        <h1 style="margin-left:10px;">Do you enjoy sky blue?</h1>
+        <img src="airplane.png" style="width:10%;height:auto;transform: scaleX(-1);float:right;margin-right:20px;">
+        <img src="fluffy.png" style="width:30%;height:auto;margin-top:4000px;">
+        <img src="fluffy.png" style="float:right;width:75%;margin-top:50px">
+    </div>
+    <div class = "sky hardsky2">
+        <img src="fluffy.png" style="height:2%;width:auto;">
+        <img src="bigcumulus.png" style="transform: scaleX(-1);margin-left:200px;width:100%;margin-top:800px;">
+        <img src="bigcumulus.png" style="margin-top:3500px; width:300%;height:40%;margin-left:-700px;">
+    </div>
+    <div class="sky hardsky3"></div>
+    <div class="sky" style="height:8000px;background-color:#010813">
+        <img src="daedalus.png" style="margin-top:2000px;width:3%;height:auto;margin-left:700px">
+    </div>
+    <div class="sky hardsky4"></div>
+    <div class="sky hardsky5"></div>
+    <div class="sky stdsky"></div>
+    <div class="sky stdsky">
+        <p class="hellojon">Hello, Jon. Apologies for the deception, but I wanted to make sure you started reading, so I thought it best not to announce myself.</p>
+        <p class="hellojon2">I'm</p>
+        <p class="hellojon2" style="font-size:70px; margin-left:60px;">assuming</p>
+        <p class="hellojon2" style="font-size:50px; margin-left:90px;">you're</p>
+        <p class="hellojon2" style="font-size:30px; margin-left:120px;">alone</p>
+    </div>
+    <div class="sky stdsky">
+        <h1 style="float:right; margin-right:50px">Which one? ;)</h1>
+    </div>
+</body>
