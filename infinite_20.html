@@ -72,14 +72,11 @@
         const ms = 1000 * timestep;
 
         const gravity = 200;
-        var velocity = -1000;
+        var v_init = -1000;
         var displacement = 0;
 
         function youJustScrolled(){
             console.log("you just scrolled :)");
-            //console.log(document.body.scrollHeight);
-            //console.log(window.scrollY);
-            //console.log("sky number = " + skyNum);
             if (document.body.scrollHeight - window.scrollY < 1000){
                 latestDivHeight = document.body.scrollHeight;
                 addSky();
@@ -91,40 +88,29 @@
             body.innerHTML += "<div class=\"sky stdsky\" id=\"sky" + skyNum + "\"></div>"
         }
 
-        function CLOUDS(){
-            const CLOUD = document.createElement("img");
-            CLOUD.src = "cloud3.png";
-            console.log("adding cloud to sky" + skyNum);
-            document.getElementById("sky" + skyNum).appendChild(CLOUD);
-            //CLOUD.style.marginBottom = document.body.scrollHeight;
-            //currDiv = document.getElementById("sky" + skyNum);
-            //currDiv.appendChild(CLOUD);
-            //return CLOUD;
-        }
-
         function sleep(ms) {
             return new Promise(resolve => setTimeout(resolve, ms));
         }
+        
+
 
         async function itBegins(){
-            //neverDidAnything()
+            const y_init = window.scrollY;
 
-            //await sleep(3000);
-            const vertex = -velocity*velocity*0.5/gravity
-            const tenth = vertex/10;
-            absoluteText(vertex + 50, ";)");
-            absoluteText(9*tenth, "anything");
-            absoluteText(7*tenth, "did");
-            absoluteText(4*tenth, "never");
-            absoluteText(2*tenth, "scrollbar");
-            absoluteText(0, "the");
-            for(let i = 0; i< 30/timestep; i++){
-                velocity += gravity * timestep;
-                displacement = velocity * timestep;
-               
-                scrollTo(0, scrollY + displacement);
-                //console.log(displacement);
+            var prev_height;
+            var curr_height;
+            var next_height;
+
+            curr_height = y_init;
+            next_height = curr_height + (v_init * timestep) + (0.5*gravity * timestep**2);
+
+            for (let i = 0; i< 30/timestep; i++){
                 await sleep(ms);
+                scrollTo(0, next_height);
+
+                prev_height = curr_height;
+                curr_height = next_height;
+                next_height = 2*curr_height - prev_height + gravity * timestep**2;
             }
         }
 
@@ -133,10 +119,14 @@
         }
 
         function neverDidAnything(){
-            const text = [";)", "anything", "did", "never", "scrollbar", "the"];
-            for(var i=0; i<text.length; i++){
-                createAppend(text[i]);
-            }
+            const vertex = -v_init*v_init*0.5/gravity;
+            const tenth = vertex/10;
+            absoluteText(vertex + 50, ";)");
+            absoluteText(9*tenth, "anything");
+            absoluteText(7*tenth, "did");
+            absoluteText(4*tenth, "never");
+            absoluteText(2*tenth, "scrollbar");
+            absoluteText(0, "the");
         }
 
         function absoluteText(height, name){
@@ -151,7 +141,6 @@
 
     </script>
 
-    <button onclick=CLOUDS()>CLOUDS</button>
     <button onclick=itBegins() style="margin-top:30px;">It Begins</button>
     <button style="margin-top:60px;" onclick="absoluteText(-200)">Oh Yeah</button>
 
